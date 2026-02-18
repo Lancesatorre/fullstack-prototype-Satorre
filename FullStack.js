@@ -47,7 +47,9 @@ function setAuthState(isAuth, user = null) {
     if (isAuth && user) {
         loggedOutNav.style.display = 'none';
         loggedInNav.style.display = 'block';
-        navUserName.textContent = `${user.first}`;
+        navUserName.textContent = user.role === 'admin'
+        ? `${user.first} (ADMIN)`
+        : user.first;
         adminLinks.style.display = user.role === 'admin' ? 'block' : 'none';
     } else {
         loggedOutNav.style.display = 'flex';
@@ -145,7 +147,10 @@ function renderProfile() {
     document.getElementById('profile-name').textContent = `${currentUser.first} ${currentUser.last}`;
     document.getElementById('profile-email').textContent = currentUser.email;
     document.getElementById('profile-role').textContent = currentUser.role;
-    document.getElementById('nav-user-name').textContent = currentUser.first;
+    document.getElementById('nav-user-name').textContent =
+    currentUser.role === 'admin'
+        ? `${currentUser.first} (ADMIN)`
+        : currentUser.first;
 }
 
 document.getElementById('edit-profile-btn').addEventListener('click', function() {

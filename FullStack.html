@@ -5,32 +5,86 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Full-Stack App</title>
+    <style>
+        /* Only used for responsive overrides that can't be done inline */
+        @media (max-width: 600px) {
+            #nav-links {
+                gap: 8px !important;
+            }
+
+            #home-card {
+                padding: 4vw !important;
+            }
+
+            .form-card {
+                padding: 6vw 5vw !important;
+                width: 80vw !important;
+                min-width: unset !important;
+            }
+
+            .form-card form {
+                width: 100% !important;
+            }
+
+            #profile-page,
+            #employees-page,
+            #departments-page,
+            #accounts-page,
+            #requests-page {
+                padding: 14px !important;
+            }
+
+            .page-table {
+                font-size: 12px !important;
+            }
+
+            .page-table th,
+            .page-table td {
+                padding: 8px 6px !important;
+            }
+
+            #request-modal>div {
+                width: 92vw !important;
+            }
+
+            .action-btns {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 4px;
+            }
+        }
+    </style>
 </head>
 
 <body style="margin: 0; font-family: sans-serif; background-color: #fafafa;">
 
     <nav
-        style="display: flex; justify-content: space-between; align-items: center; padding: 10px 40px; background: #222; color: white; box-shadow: 5px 5px 10px 2px rgba(77, 77, 77, 1); position: relative; z-index: 1000;">
-        <a href="#/" style="color: white; text-decoration: none; font-size: 1rem;"> Full-Stack App (LANCE TIMOTHY
-            SATORRE)</a>
+        style="display: flex; justify-content: space-between; align-items: center; padding: 10px clamp(16px, 4vw, 40px); background: #222; color: white; box-shadow: 5px 5px 10px 2px rgba(77, 77, 77, 1); position: relative; z-index: 1000; flex-wrap: wrap; gap: 8px;">
+        <a href="#/"
+            style="color: white; text-decoration: none; font-size: clamp(0.75rem, 2vw, 1rem); flex-shrink: 1; min-width: 0;">Full-Stack
+            App (LANCE TIMOTHY SATORRE)</a>
 
-        <div style="display: flex; justify-content: center; align-items: center; padding: 5px;">
+        <div style="display: flex; justify-content: center; align-items: center; padding: 5px; flex-shrink: 0;">
 
-            <ul id="logged-out-nav" style="list-style: none; display: flex; gap: 15px; margin: 0; padding: 0;">
-                <li><a href="#/login" style="color: white; text-decoration: none;">Login</a></li>
-                <li><a href="#/register" style="color: white; text-decoration: none;">Register</a></li>
+            <ul id="logged-out-nav" id="nav-links"
+                style="list-style: none; display: flex; gap: 15px; margin: 0; padding: 0;">
+                <li><a href="#/login"
+                        style="color: white; text-decoration: none; font-size: clamp(0.8rem, 2vw, 1rem);">Login</a></li>
+                <li><a href="#/register"
+                        style="color: white; text-decoration: none; font-size: clamp(0.8rem, 2vw, 1rem);">Register</a>
+                </li>
             </ul>
 
             <ul id="logged-in-nav" style="list-style: none; display: none; margin: 0; padding: 0; position: relative;">
                 <li>
                     <div id="user-dropdown-toggle"
                         style="color: white; cursor: pointer; display: flex; align-items: center; gap: 5px; font-weight: bold;">
-                        <span id="nav-user-name"></span>
+                        <span id="nav-user-name" style="font-size: clamp(0.8rem, 2vw, 1rem);"></span>
                         <span style="font-size: 0.8em;">▼</span>
                     </div>
 
                     <div id="user-dropdown-menu"
-                        style="display: none; position: absolute; top: 35px; right: 0; background: white; border-radius: 5px; box-shadow: 0px 4px 10px rgba(0,0,0,0.2); width: 160px; overflow: hidden; font-size: 14px; text-align: left;">
+                        style="display: none; position: absolute; top: 35px; right: 0; background: white; border-radius: 5px; box-shadow: 0px 4px 10px rgba(0,0,0,0.2); width: 160px; overflow: hidden; font-size: 14px; text-align: left; z-index: 9999;">
                         <a href="#/profile"
                             style="display: block; padding: 10px 15px; color: black; text-decoration: none; border-bottom: 1px solid #f0f0f0;">Profile</a>
 
@@ -56,25 +110,27 @@
     </nav>
 
     <main
-        style="margin-top: 1rem; height: 90vh; width: 100%; display: flex; justify-content: center; align-items: flex-start; padding-top: 20px; background-color: #c9c7c7;">
+        style="margin-top: 1rem; min-height: 90vh; width: 100%; display: flex; justify-content: center; align-items: flex-start; padding: 20px clamp(12px, 3vw, 40px); background-color: #c9c7c7; box-sizing: border-box;">
 
-        <section id="home-page" style="display: block;">
+        <!-- HOME PAGE -->
+        <section id="home-page" style="display: block; width: 100%; max-width: 700px;">
             <div style="display: flex; justify-content: center; align-items: center;">
-                <div
-                    style="padding: 5vh; border: 2px solid gray; border-radius: 3vh; box-shadow: 5px 5px 10px 2px rgba(77, 77, 77, 0.2); background: white;">
-                    <h3 style="font-size: 10vh; margin-top: 0; margin-bottom: 2vh;">Welcome</h3>
-                    <p style="font-size: 5vh; margin-top: 0;">This is a frontend-only full-stack prototype.</p>
+                <div id="home-card"
+                    style="padding: clamp(16px, 5vw, 5vh); border: 2px solid gray; border-radius: 3vh; box-shadow: 5px 5px 10px 2px rgba(77, 77, 77, 0.2); background: white; width: 100%; box-sizing: border-box;">
+                    <h3 style="font-size: clamp(2.5rem, 10vw, 10vh); margin-top: 0; margin-bottom: 2vh;">Welcome</h3>
+                    <p style="font-size: clamp(1.2rem, 4vw, 5vh); margin-top: 0;">This is a frontend-only full-stack
+                        prototype.</p>
 
-                    <ul style="padding-left: 2vh; font-size: 3vh;">
-                        <li style="margin-left: 3vh;">Email registration + fake Verification</li>
-                        <li style="margin-left: 3vh;">Login with JWT-Like</li>
-                        <li style="margin-left: 3vh;">Role-based UI (Admin/User)</li>
+                    <ul style="padding-left: 2vh; font-size: clamp(0.9rem, 2.5vw, 3vh);">
+                        <li style="margin-left: 3vh; margin-bottom: 6px;">Email registration + fake Verification</li>
+                        <li style="margin-left: 3vh; margin-bottom: 6px;">Login with JWT-Like</li>
+                        <li style="margin-left: 3vh; margin-bottom: 6px;">Role-based UI (Admin/User)</li>
                         <li style="margin-left: 3vh;">CRUD for Employees, Departments, Requests</li>
                     </ul>
 
                     <div
-                        style="display: flex; justify-content: start; align-items: center; padding: 12px; background: #ADD8E6; margin-top: 20px; border-radius: 10px;">
-                        <p style="margin: 0;">
+                        style="display: flex; justify-content: start; align-items: center; padding: 12px; background: #ADD8E6; margin-top: 20px; border-radius: 10px; flex-wrap: wrap; gap: 4px;">
+                        <p style="margin: 0; font-size: clamp(0.8rem, 2vw, 1rem);">
                             <span style="font-weight: bold;">⚠️ Note: </span> All data is stored in
                             <span style="color: palevioletred; font-weight: bold;">localStorage</span>. Refresh to
                             reset.
@@ -83,7 +139,7 @@
 
                     <a href="#/login" style="text-decoration: none;">
                         <button
-                            style="margin-top: 2vh; background: #8A8AFF; border: none; border-radius: 5px; padding: 10px 20px; color: white; font-size: 2vh; cursor: pointer;">
+                            style="margin-top: 2vh; background: #8A8AFF; border: none; border-radius: 5px; padding: 10px 20px; color: white; font-size: clamp(0.85rem, 2vw, 2vh); cursor: pointer;">
                             Get Started →
                         </button>
                     </a>
@@ -91,22 +147,23 @@
             </div>
         </section>
 
-        <section id="login-page" style="display: none;">
-            <div
-                style="width: auto; height: auto; padding: 40px; border: 1px solid black; border-radius: 20px; box-shadow: 5px 5px 10px 2px rgba(77, 77, 77, 0.2); background: white;">
-                <p style="font-size: 5vh; margin-top: 0; margin-bottom: 10px;">Login</p>
+        <!-- LOGIN PAGE -->
+        <section id="login-page" style="display: none; width: 100%; max-width: 420px;">
+            <div class="form-card"
+                style="width: 100%; padding: clamp(24px, 6vw, 40px); border: 1px solid black; border-radius: 20px; box-shadow: 5px 5px 10px 2px rgba(77, 77, 77, 0.2); background: white; box-sizing: border-box;">
+                <p style="font-size: clamp(1.8rem, 6vw, 5vh); margin-top: 0; margin-bottom: 10px;">Login</p>
                 <hr style="border: 1px solid black; margin-bottom: 20px;">
 
-                <form id="loginForm" style="display: flex; flex-direction: column; gap: 5px; width: 250px;">
+                <form id="loginForm" style="display: flex; flex-direction: column; gap: 5px; width: 100%;">
                     <label for="login-email" style="font-weight: bold;">Email</label>
                     <input type="email" id="login-email" required placeholder="Email"
-                        style="border: 2px solid gray; border-radius: 5px; padding: 10px; margin-bottom: 10px;">
+                        style="border: 2px solid gray; border-radius: 5px; padding: 10px; margin-bottom: 10px; width: 100%; box-sizing: border-box;">
 
                     <label for="login-password" style="font-weight: bold;">Password</label>
                     <input type="password" id="login-password" required placeholder="Password"
-                        style="border: 2px solid gray; border-radius: 5px; padding: 10px;">
+                        style="border: 2px solid gray; border-radius: 5px; padding: 10px; width: 100%; box-sizing: border-box;">
 
-                    <div style="margin-top: 25px; display: flex; gap: 10px;">
+                    <div style="margin-top: 25px; display: flex; gap: 10px; flex-wrap: wrap;">
                         <button type="submit"
                             style="background: #3CA1C3; color: white; border: none; border-radius: 8px; padding: 8px 20px; cursor: pointer;">Login</button>
                         <a href="#/"
@@ -116,23 +173,24 @@
             </div>
         </section>
 
-        <section id="register-page" style="display: none;">
-            <div
-                style="width: auto; height: auto; padding: 40px; border: 1px solid black; border-radius: 20px; box-shadow: 5px 5px 10px 2px rgba(77, 77, 77, 0.2); background: white;">
-                <p style="font-size: 5vh; margin-top: 0; margin-bottom: 10px;">Register</p>
+        <!-- REGISTER PAGE -->
+        <section id="register-page" style="display: none; width: 100%; max-width: 420px;">
+            <div class="form-card"
+                style="width: 100%; padding: clamp(24px, 6vw, 40px); border: 1px solid black; border-radius: 20px; box-shadow: 5px 5px 10px 2px rgba(77, 77, 77, 0.2); background: white; box-sizing: border-box;">
+                <p style="font-size: clamp(1.8rem, 6vw, 5vh); margin-top: 0; margin-bottom: 10px;">Register</p>
                 <hr style="border: 1px solid black; margin-bottom: 20px;">
 
-                <form id="registerForm" style="display: flex; flex-direction: column; gap: 15px; width: 250px;">
+                <form id="registerForm" style="display: flex; flex-direction: column; gap: 15px; width: 100%;">
                     <input id="reg-first" placeholder="First Name" required
-                        style="border: 2px solid gray; border-radius: 5px; padding: 10px;">
+                        style="border: 2px solid gray; border-radius: 5px; padding: 10px; width: 100%; box-sizing: border-box;">
                     <input id="reg-last" placeholder="Last Name" required
-                        style="border: 2px solid gray; border-radius: 5px; padding: 10px;">
+                        style="border: 2px solid gray; border-radius: 5px; padding: 10px; width: 100%; box-sizing: border-box;">
                     <input id="reg-email" type="email" placeholder="Email" required
-                        style="border: 2px solid gray; border-radius: 5px; padding: 10px;">
+                        style="border: 2px solid gray; border-radius: 5px; padding: 10px; width: 100%; box-sizing: border-box;">
                     <input id="reg-password" type="password" placeholder="Password" required minlength="6"
-                        style="border: 2px solid gray; border-radius: 5px; padding: 10px;">
+                        style="border: 2px solid gray; border-radius: 5px; padding: 10px; width: 100%; box-sizing: border-box;">
 
-                    <div style="margin-top: 10px; display: flex; gap: 10px;">
+                    <div style="margin-top: 10px; display: flex; gap: 10px; flex-wrap: wrap;">
                         <button type="submit"
                             style="background: #8A8AFF; color: white; border: none; border-radius: 8px; padding: 8px 20px; cursor: pointer;">Register</button>
                         <a href="#/"
@@ -142,24 +200,27 @@
             </div>
         </section>
 
+        <!-- VERIFY PAGE -->
         <section id="verify-page" style="display: none; width: 100%; max-width: 800px;">
             <div
-                style="background: white; padding: 40px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 100%;">
-                <h1 style="margin: 0 0 20px 0; font-size: 2.5rem; color: #333; font-weight: normal;">Verify Your Email
-                </h1>
+                style="background: white; padding: clamp(20px, 5vw, 40px); border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 100%; box-sizing: border-box;">
+                <h1
+                    style="margin: 0 0 20px 0; font-size: clamp(1.6rem, 5vw, 2.5rem); color: #333; font-weight: normal;">
+                    Verify Your Email</h1>
 
                 <div
-                    style="background-color: #d4edda; border: 1px solid #c3e6cb; color: #155724; padding: 15px 20px; border-radius: 5px; margin-bottom: 30px; display: flex; align-items: center; gap: 10px;">
+                    style="background-color: #d4edda; border: 1px solid #c3e6cb; color: #155724; padding: 15px 20px; border-radius: 5px; margin-bottom: 30px; display: flex; align-items: flex-start; gap: 10px; flex-wrap: wrap;">
                     <span style="font-size: 1.2rem;">✅</span>
-                    <span>A verification link has been sent to <strong id="verify-email-display"></strong> .</span>
+                    <span style="font-size: clamp(0.85rem, 2vw, 1rem);">A verification link has been sent to <strong
+                            id="verify-email-display"></strong>.</span>
                 </div>
 
-                <p style="color: #444; margin-bottom: 20px; font-size: 1.1rem;">For demo purposes, click below to
-                    simulate verification:</p>
+                <p style="color: #444; margin-bottom: 20px; font-size: clamp(0.9rem, 2vw, 1.1rem);">For demo purposes,
+                    click below to simulate verification:</p>
 
-                <div style="display: flex; gap: 15px; align-items: center;">
+                <div style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap;">
                     <button id="simulate-verify-btn"
-                        style="background: #2D7A4D; color: white; border: none; border-radius: 5px; padding: 12px 24px; cursor: pointer; font-weight: bold; font-size: 1rem; display: flex; align-items: center; gap: 10px;">
+                        style="background: #2D7A4D; color: white; border: none; border-radius: 5px; padding: 12px 24px; cursor: pointer; font-weight: bold; font-size: clamp(0.85rem, 2vw, 1rem); display: flex; align-items: center; gap: 10px;">
                         <span
                             style="background: white; color: #2D7A4D; border-radius: 3px; width: 18px; height: 18px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem;">✓</span>
                         Simulate Email Verification
@@ -167,7 +228,7 @@
 
                     <a href="#/login" style="text-decoration: none;">
                         <button
-                            style="background: white; color: #555; border: 1px solid #ccc; border-radius: 5px; padding: 12px 24px; cursor: pointer; font-size: 1rem;">
+                            style="background: white; color: #555; border: 1px solid #ccc; border-radius: 5px; padding: 12px 24px; cursor: pointer; font-size: clamp(0.85rem, 2vw, 1rem);">
                             Go to Login
                         </button>
                     </a>
@@ -175,16 +236,20 @@
             </div>
         </section>
 
+        <!-- PROFILE PAGE -->
         <section id="profile-page"
-            style="display: none; width: 100%; max-width: 600px; margin: 0 auto;  border: 2px solid gray; padding: 20px; border-radius: 20px;  box-shadow: 5px 5px 10px 2px rgba(77, 77, 77, 0.2);">
-            <h2 style="margin-bottom: 20px; font-size: 2rem; color: black; margin: 0 0 20px;">My Profile</h2>
+            style="display: none; width: 100%; max-width: 600px; margin: 0 auto; border: 2px solid gray; padding: clamp(14px, 4vw, 20px); border-radius: 20px; box-shadow: 5px 5px 10px 2px rgba(77, 77, 77, 0.2); box-sizing: border-box;">
+            <h2 style="margin-bottom: 20px; font-size: clamp(1.4rem, 5vw, 2rem); color: black; margin: 0 0 20px;">My
+                Profile</h2>
             <div id="profile-details-container"
-                style="padding: 20px; border: 1px solid #1c1a1a; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); background: white;">
-                <h3 id="profile-name" style="margin-top: 0; margin-bottom: 15px; font-size: 1.5rem;"></h3>
+                style="padding: clamp(12px, 3vw, 20px); border: 1px solid #1c1a1a; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); background: white;">
+                <h3 id="profile-name"
+                    style="margin-top: 0; margin-bottom: 15px; font-size: clamp(1.1rem, 3vw, 1.5rem);"></h3>
                 <hr>
-                <p style="margin-bottom: 10px;"><strong>Email:</strong> <span id="profile-email"></span></p>
-                <p style="margin-bottom: 20px;"><strong>Role:</strong> <span id="profile-role"
-                        style="text-transform: capitalize;"></span></p>
+                <p style="margin-bottom: 10px; font-size: clamp(0.85rem, 2vw, 1rem);"><strong>Email:</strong> <span
+                        id="profile-email"></span></p>
+                <p style="margin-bottom: 20px; font-size: clamp(0.85rem, 2vw, 1rem);"><strong>Role:</strong> <span
+                        id="profile-role" style="text-transform: capitalize;"></span></p>
                 <button id="edit-profile-btn"
                     style="background: #2E8B57; color: white; border: 1px solid gray; border-radius: 4px; padding: 8px 16px; cursor: pointer; font-weight: bold;">Edit
                     Profile</button>
@@ -196,24 +261,25 @@
                     style="background: #f5f5f5; padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #333;">
                     Edit Profile
                 </div>
-                <form id="editProfileForm" style="padding: 20px; display: flex; flex-direction: column; gap: 15px;">
+                <form id="editProfileForm"
+                    style="padding: clamp(12px, 3vw, 20px); display: flex; flex-direction: column; gap: 15px;">
                     <div style="display: flex; flex-direction: column; gap: 5px;">
                         <label style="font-size: 14px; color: #333;">First Name</label>
                         <input type="text" id="edit-profile-first" required
-                            style="border: 1px solid #ccc; border-radius: 4px; padding: 8px;">
+                            style="border: 1px solid #ccc; border-radius: 4px; padding: 8px; width: 100%; box-sizing: border-box;">
                     </div>
                     <div style="display: flex; flex-direction: column; gap: 5px;">
                         <label style="font-size: 14px; color: #333;">Last Name</label>
                         <input type="text" id="edit-profile-last" required
-                            style="border: 1px solid #ccc; border-radius: 4px; padding: 8px;">
+                            style="border: 1px solid #ccc; border-radius: 4px; padding: 8px; width: 100%; box-sizing: border-box;">
                     </div>
                     <div style="display: flex; flex-direction: column; gap: 5px;">
                         <label style="font-size: 14px; color: #333;">Password</label>
                         <input type="password" id="edit-profile-password" required
-                            style="border: 1px solid #ccc; border-radius: 4px; padding: 8px;">
+                            style="border: 1px solid #ccc; border-radius: 4px; padding: 8px; width: 100%; box-sizing: border-box;">
                     </div>
 
-                    <div style="display: flex; gap: 10px; margin-top: 10px;">
+                    <div style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;">
                         <button type="submit"
                             style="background: #2E8B57; color: white; border: none; border-radius: 4px; padding: 10px 20px; cursor: pointer;">Save
                             Changes</button>
@@ -224,28 +290,32 @@
             </div>
         </section>
 
+        <!-- EMPLOYEES PAGE -->
         <section id="employees-page"
-            style="display: none; width: 100%; max-width: 800px; margin: 0 auto; border: 2px solid gray; padding: 20px; border-radius: 20px;  box-shadow: 5px 5px 10px 2px rgba(77, 77, 77, 0.2);">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;; ">
-                <h2 style="margin: 0; font-size: 2rem;">Employees</h2>
+            style="display: none; width: 100%; max-width: 800px; margin: 0 auto; border: 2px solid gray; padding: clamp(14px, 4vw, 20px); border-radius: 20px; box-shadow: 5px 5px 10px 2px rgba(77, 77, 77, 0.2); box-sizing: border-box;">
+            <div
+                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
+                <h2 style="margin: 0; font-size: clamp(1.4rem, 5vw, 2rem);">Employees</h2>
                 <button id="show-add-employee-btn"
                     style="background: #2E8B57; color: white; border: none; border-radius: 5px; padding: 8px 16px; cursor: pointer; font-weight: bold;">+
                     Add Employee</button>
             </div>
 
-            <table
-                style="width: 100%; border-collapse: collapse; background: white; margin-bottom: 30px; border: 1px solid #1c1a1a; border-radius: 8px; ">
-                <thead>
-                    <tr style="border-bottom: 2px solid #ddd; text-align: left;">
-                        <th style="padding: 12px; font-weight: bold;">ID</th>
-                        <th style="padding: 12px; font-weight: bold;">Name</th>
-                        <th style="padding: 12px; font-weight: bold;">Position</th>
-                        <th style="padding: 12px; font-weight: bold;">Dept</th>
-                        <th style="padding: 12px; font-weight: bold;">Actions</th>
-                    </tr>
-                </thead>
-                <tbody id="employees-table-body"></tbody>
-            </table>
+            <div style="overflow-x: auto; margin-bottom: 30px;">
+                <table class="page-table"
+                    style="width: 100%; border-collapse: collapse; background: white; border: 1px solid #1c1a1a; border-radius: 8px; min-width: 480px;">
+                    <thead>
+                        <tr style="border-bottom: 2px solid #ddd; text-align: left;">
+                            <th style="padding: 12px; font-weight: bold;">ID</th>
+                            <th style="padding: 12px; font-weight: bold;">Name</th>
+                            <th style="padding: 12px; font-weight: bold;">Position</th>
+                            <th style="padding: 12px; font-weight: bold;">Dept</th>
+                            <th style="padding: 12px; font-weight: bold;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="employees-table-body"></tbody>
+                </table>
+            </div>
 
             <div id="employee-form-container"
                 style="display: none; border: 1px solid #ddd; border-radius: 5px; background: white; overflow: hidden;">
@@ -253,34 +323,34 @@
                     style="background: #f5f5f5; padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #333;">
                     Add/Edit Employee
                 </div>
-                <form id="employeeForm" style="padding: 20px; display: flex; flex-direction: column; gap: 15px;">
+                <form id="employeeForm"
+                    style="padding: clamp(12px, 3vw, 20px); display: flex; flex-direction: column; gap: 15px;">
                     <div style="display: flex; flex-direction: column; gap: 5px;">
                         <label style="font-size: 14px; color: #333;">Employee ID</label>
                         <input type="text" id="emp-id" required
-                            style="border: 1px solid #ccc; border-radius: 4px; padding: 8px;">
+                            style="border: 1px solid #ccc; border-radius: 4px; padding: 8px; width: 100%; box-sizing: border-box;">
                     </div>
                     <div style="display: flex; flex-direction: column; gap: 5px;">
                         <label style="font-size: 14px; color: #333;">User Email</label>
                         <input type="email" id="emp-email" required
-                            style="border: 1px solid #ccc; border-radius: 4px; padding: 8px;">
+                            style="border: 1px solid #ccc; border-radius: 4px; padding: 8px; width: 100%; box-sizing: border-box;">
                     </div>
                     <div style="display: flex; flex-direction: column; gap: 5px;">
                         <label style="font-size: 14px; color: #333;">Position</label>
                         <input type="text" id="emp-position" required
-                            style="border: 1px solid #ccc; border-radius: 4px; padding: 8px;">
+                            style="border: 1px solid #ccc; border-radius: 4px; padding: 8px; width: 100%; box-sizing: border-box;">
                     </div>
                     <div style="display: flex; flex-direction: column; gap: 5px;">
                         <label style="font-size: 14px; color: #333;">Department</label>
                         <select id="emp-dept" required
-                            style="border: 1px solid #ccc; border-radius: 4px; padding: 8px; background: white;">
-                        </select>
+                            style="border: 1px solid #ccc; border-radius: 4px; padding: 8px; background: white; width: 100%; box-sizing: border-box;"></select>
                     </div>
                     <div style="display: flex; flex-direction: column; gap: 5px;">
                         <label style="font-size: 14px; color: #333;">Hire Date</label>
                         <input type="date" id="emp-hire-date" required
-                            style="border: 1px solid #ccc; border-radius: 4px; padding: 8px;">
+                            style="border: 1px solid #ccc; border-radius: 4px; padding: 8px; width: 100%; box-sizing: border-box;">
                     </div>
-                    <div style="display: flex; gap: 10px; margin-top: 10px;">
+                    <div style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;">
                         <button type="submit"
                             style="background: #2E8B57; color: white; border: none; border-radius: 4px; padding: 10px 20px; cursor: pointer;">Save</button>
                         <button type="button" id="cancel-employee-btn"
@@ -290,26 +360,30 @@
             </div>
         </section>
 
+        <!-- DEPARTMENTS PAGE -->
         <section id="departments-page"
-            style="display: none; width: 100%; max-width: 800px; margin: 0 auto;  border: 2px solid gray; padding: 20px; border-radius: 20px;  box-shadow: 5px 5px 10px 2px rgba(77, 77, 77, 0.2);">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                <h2 style="margin: 0; font-size: 2rem;">Departments</h2>
+            style="display: none; width: 100%; max-width: 800px; margin: 0 auto; border: 2px solid gray; padding: clamp(14px, 4vw, 20px); border-radius: 20px; box-shadow: 5px 5px 10px 2px rgba(77, 77, 77, 0.2); box-sizing: border-box;">
+            <div
+                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
+                <h2 style="margin: 0; font-size: clamp(1.4rem, 5vw, 2rem);">Departments</h2>
                 <button id="show-add-department-btn"
                     style="background: #2E8B57; color: white; border: none; border-radius: 5px; padding: 8px 16px; cursor: pointer; font-weight: bold;">+
                     Add Department</button>
             </div>
 
-            <table
-                style="width: 100%; border-collapse: collapse; background: white; margin-bottom: 30px; border: 1px solid #1c1a1a; border-radius: 8px; ">
-                <thead>
-                    <tr style="border-bottom: 2px solid #ddd; text-align: left; background: #f8f9fa;">
-                        <th style="padding: 12px; font-weight: bold;">Name</th>
-                        <th style="padding: 12px; font-weight: bold;">Description</th>
-                        <th style="padding: 12px; font-weight: bold;">Actions</th>
-                    </tr>
-                </thead>
-                <tbody id="departments-table-body"></tbody>
-            </table>
+            <div style="overflow-x: auto; margin-bottom: 30px;">
+                <table class="page-table"
+                    style="width: 100%; border-collapse: collapse; background: white; border: 1px solid #1c1a1a; border-radius: 8px; min-width: 360px;">
+                    <thead>
+                        <tr style="border-bottom: 2px solid #ddd; text-align: left; background: #f8f9fa;">
+                            <th style="padding: 12px; font-weight: bold;">Name</th>
+                            <th style="padding: 12px; font-weight: bold;">Description</th>
+                            <th style="padding: 12px; font-weight: bold;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="departments-table-body"></tbody>
+                </table>
+            </div>
 
             <div id="department-form-container"
                 style="display: none; border: 1px solid #ddd; border-radius: 5px; background: white; overflow: hidden;">
@@ -317,19 +391,20 @@
                     style="background: #f5f5f5; padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #333;">
                     Add/Edit Department
                 </div>
-                <form id="departmentForm" style="padding: 20px; display: flex; flex-direction: column; gap: 15px;">
+                <form id="departmentForm"
+                    style="padding: clamp(12px, 3vw, 20px); display: flex; flex-direction: column; gap: 15px;">
                     <div style="display: flex; flex-direction: column; gap: 5px;">
                         <label style="font-size: 14px; color: #333;">Department Name</label>
                         <input type="text" id="dept-name" required
-                            style="border: 1px solid #ccc; border-radius: 4px; padding: 8px;">
+                            style="border: 1px solid #ccc; border-radius: 4px; padding: 8px; width: 100%; box-sizing: border-box;">
                     </div>
                     <div style="display: flex; flex-direction: column; gap: 5px;">
                         <label style="font-size: 14px; color: #333;">Description</label>
                         <input type="text" id="dept-description" required
-                            style="border: 1px solid #ccc; border-radius: 4px; padding: 8px;">
+                            style="border: 1px solid #ccc; border-radius: 4px; padding: 8px; width: 100%; box-sizing: border-box;">
                     </div>
 
-                    <div style="display: flex; gap: 10px; margin-top: 10px;">
+                    <div style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;">
                         <button type="submit"
                             style="background: #2E8B57; color: white; border: none; border-radius: 4px; padding: 10px 20px; cursor: pointer;">Save</button>
                         <button type="button" id="cancel-department-btn"
@@ -339,28 +414,32 @@
             </div>
         </section>
 
+        <!-- ACCOUNTS PAGE -->
         <section id="accounts-page"
-            style="display: none; width: 100%; max-width: 900px; margin: 0 auto;  border: 2px solid gray; padding: 20px; border-radius: 20px;  box-shadow: 5px 5px 10px 2px rgba(77, 77, 77, 0.2);">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                <h2 style="margin: 0; font-size: 2rem;">Accounts</h2>
+            style="display: none; width: 100%; max-width: 900px; margin: 0 auto; border: 2px solid gray; padding: clamp(14px, 4vw, 20px); border-radius: 20px; box-shadow: 5px 5px 10px 2px rgba(77, 77, 77, 0.2); box-sizing: border-box;">
+            <div
+                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
+                <h2 style="margin: 0; font-size: clamp(1.4rem, 5vw, 2rem);">Accounts</h2>
                 <button id="show-add-account-btn"
                     style="background: #2E8B57; color: white; border: none; border-radius: 5px; padding: 8px 16px; cursor: pointer; font-weight: bold;">+
                     Add Account</button>
             </div>
 
-            <table
-                style="width: 100%; border-collapse: collapse; background: white; margin-bottom: 30px; border-radius: 10px; border: 1px solid #1c1a1a; border-radius: 8px; ">
-                <thead>
-                    <tr style="border-bottom: 2px solid #ddd; text-align: left; background: #f8f9fa; ">
-                        <th style="padding: 12px; font-weight: bold;">Name</th>
-                        <th style="padding: 12px; font-weight: bold;">Email</th>
-                        <th style="padding: 12px; font-weight: bold;">Role</th>
-                        <th style="padding: 12px; font-weight: bold;">Verified</th>
-                        <th style="padding: 12px; font-weight: bold; text-align: center;">Actions</th>
-                    </tr>
-                </thead>
-                <tbody id="accounts-table-body"></tbody>
-            </table>
+            <div style="overflow-x: auto; margin-bottom: 30px;">
+                <table class="page-table"
+                    style="width: 100%; border-collapse: collapse; background: white; border: 1px solid #1c1a1a; border-radius: 8px; min-width: 560px;">
+                    <thead>
+                        <tr style="border-bottom: 2px solid #ddd; text-align: left; background: #f8f9fa;">
+                            <th style="padding: 12px; font-weight: bold;">Name</th>
+                            <th style="padding: 12px; font-weight: bold;">Email</th>
+                            <th style="padding: 12px; font-weight: bold;">Role</th>
+                            <th style="padding: 12px; font-weight: bold;">Verified</th>
+                            <th style="padding: 12px; font-weight: bold; text-align: center;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="accounts-table-body"></tbody>
+                </table>
+            </div>
 
             <div id="account-form-container"
                 style="display: none; border: 1px solid #ddd; border-radius: 5px; background: white; overflow: hidden;">
@@ -368,31 +447,32 @@
                     style="background: #f5f5f5; padding: 12px 15px; border-bottom: 1px solid #ddd; font-weight: bold; color: #333;">
                     Add/Edit Account
                 </div>
-                <form id="accountForm" style="padding: 20px; display: flex; flex-direction: column; gap: 15px;">
+                <form id="accountForm"
+                    style="padding: clamp(12px, 3vw, 20px); display: flex; flex-direction: column; gap: 15px;">
                     <div style="display: flex; flex-direction: column; gap: 5px;">
                         <label style="font-size: 14px; color: #333;">First Name</label>
                         <input type="text" id="acc-first" required
-                            style="border: 1px solid #ccc; border-radius: 4px; padding: 8px;">
+                            style="border: 1px solid #ccc; border-radius: 4px; padding: 8px; width: 100%; box-sizing: border-box;">
                     </div>
                     <div style="display: flex; flex-direction: column; gap: 5px;">
                         <label style="font-size: 14px; color: #333;">Last Name</label>
                         <input type="text" id="acc-last" required
-                            style="border: 1px solid #ccc; border-radius: 4px; padding: 8px;">
+                            style="border: 1px solid #ccc; border-radius: 4px; padding: 8px; width: 100%; box-sizing: border-box;">
                     </div>
                     <div style="display: flex; flex-direction: column; gap: 5px;">
                         <label style="font-size: 14px; color: #333;">Email</label>
                         <input type="email" id="acc-email" required
-                            style="border: 1px solid #ccc; border-radius: 4px; padding: 8px;">
+                            style="border: 1px solid #ccc; border-radius: 4px; padding: 8px; width: 100%; box-sizing: border-box;">
                     </div>
                     <div style="display: flex; flex-direction: column; gap: 5px;">
                         <label style="font-size: 14px; color: #333;">Password</label>
                         <input type="password" id="acc-password" required
-                            style="border: 2px solid gray; border-radius: 5px; padding: 10px;">
+                            style="border: 2px solid gray; border-radius: 5px; padding: 10px; width: 100%; box-sizing: border-box;">
                     </div>
                     <div style="display: flex; flex-direction: column; gap: 5px;">
                         <label style="font-size: 14px; color: #333;">Role</label>
                         <select id="acc-role"
-                            style="border: 1px solid #ccc; border-radius: 4px; padding: 8px; background: white;">
+                            style="border: 1px solid #ccc; border-radius: 4px; padding: 8px; background: white; width: 100%; box-sizing: border-box;">
                             <option value="user">User</option>
                             <option value="admin">Admin</option>
                         </select>
@@ -402,7 +482,7 @@
                         <label style="font-size: 14px; color: #333;">Verified</label>
                     </div>
 
-                    <div style="display: flex; gap: 10px; margin-top: 10px;">
+                    <div style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;">
                         <button type="submit"
                             style="background: #5a67d8; color: white; border: none; border-radius: 4px; padding: 8px 16px; cursor: pointer;">Save</button>
                         <button type="button" id="cancel-account-btn"
@@ -412,10 +492,12 @@
             </div>
         </section>
 
+        <!-- REQUESTS PAGE -->
         <section id="requests-page"
-            style="display: none; width: 100%; max-width: 800px; margin: 0 auto;  border: 2px solid gray; padding: 20px; border-radius: 20px;  box-shadow: 5px 5px 10px 2px rgba(77, 77, 77, 0.2);">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                <h2 style="margin: 0; font-size: 2rem;">My Requests</h2>
+            style="display: none; width: 100%; max-width: 800px; margin: 0 auto; border: 2px solid gray; padding: clamp(14px, 4vw, 20px); border-radius: 20px; box-shadow: 5px 5px 10px 2px rgba(77, 77, 77, 0.2); box-sizing: border-box;">
+            <div
+                style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
+                <h2 style="margin: 0; font-size: clamp(1.4rem, 5vw, 2rem);">My Requests</h2>
                 <button id="show-new-request-btn"
                     style="background: #2E8B57; color: white; border: none; border-radius: 5px; padding: 8px 16px; cursor: pointer; font-weight: bold;">+
                     New Request</button>
@@ -428,28 +510,30 @@
                     One</button>
             </div>
 
-            <table id="requests-table"
-                style="width: 100%; border-collapse: collapse; background: white; display: none; border: 1px solid #1c1a1a; border-radius: 8px; ">
-                <thead>
-                    <tr style="border-bottom: 2px solid #ddd; text-align: left; background: #f8f9fa;">
-                        <th style="padding: 12px;">Type</th>
-                        <th style="padding: 12px;">Items Count</th>
-                        <th style="padding: 12px;">Status</th>
-                    </tr>
-                </thead>
-                <tbody id="requests-table-body"></tbody>
-            </table>
+            <div style="overflow-x: auto;">
+                <table id="requests-table" class="page-table"
+                    style="width: 100%; border-collapse: collapse; background: white; display: none; border: 1px solid #1c1a1a; border-radius: 8px; min-width: 320px;">
+                    <thead>
+                        <tr style="border-bottom: 2px solid #ddd; text-align: left; background: #f8f9fa;">
+                            <th style="padding: 12px;">Type</th>
+                            <th style="padding: 12px;">Items Count</th>
+                            <th style="padding: 12px;">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="requests-table-body"></tbody>
+                </table>
+            </div>
 
             <div id="request-modal"
-                style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000; justify-content: center; align-items: center;">
+                style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000; justify-content: center; align-items: center; padding: 16px; box-sizing: border-box;">
                 <div
-                    style="background: white; width: 450px; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.3); position: relative;">
+                    style="background: white; width: min(450px, 92vw); border-radius: 8px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.3); position: relative;">
                     <div
                         style="display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; border-bottom: 1px solid #eee;">
                         <h3 style="margin: 0;">New Request</h3>
                         <span id="close-modal" style="cursor: pointer; font-size: 20px; color: #999;">&times;</span>
                     </div>
-                    <form id="requestForm" style="padding: 20px;">
+                    <form id="requestForm" style="padding: clamp(14px, 4vw, 20px);">
                         <div style="margin-bottom: 15px;">
                             <label style="display: block; font-size: 14px; margin-bottom: 5px;">Type</label>
                             <input type="text" id="req-type" value="Equipment" required
@@ -457,11 +541,10 @@
                         </div>
                         <div style="margin-bottom: 10px;">
                             <label style="display: block; font-size: 14px; margin-bottom: 5px;">Items</label>
-                            <div id="items-container" style="display: flex; flex-direction: column; gap: 8px;">
-                            </div>
+                            <div id="items-container" style="display: flex; flex-direction: column; gap: 8px;"></div>
                         </div>
                         <button type="submit"
-                            style="background: #2E8B57; color: white; border: none; border-radius: 5px; padding: 8px 16px;width: auto; cursor: pointer; font-weight: bold;">Submit
+                            style="background: #2E8B57; color: white; border: none; border-radius: 5px; padding: 8px 16px; width: auto; cursor: pointer; font-weight: bold;">Submit
                             Request</button>
                     </form>
                 </div>
