@@ -1,0 +1,86 @@
+
+@media (max-width: 600px) {
+    #nav-links {
+        gap: 8px !important;
+    }
+
+    #home-card {
+        padding: 4vw !important;
+    }
+
+    .form-card {
+        padding: 6vw 5vw !important;
+        width: 80vw !important;
+        min-width: unset !important;
+    }
+
+    .form-card form {
+        width: 100% !important;
+    }
+
+    #profile-page,
+    #employees-page,
+    #departments-page,
+    #accounts-page,
+    #requests-page {
+        padding: 14px !important;
+    }
+
+    .page-table {
+        font-size: 12px !important;
+    }
+
+    .page-table th,
+    .page-table td {
+        padding: 8px 6px !important;
+    }
+
+    #request-modal > div {
+        width: 92vw !important;
+    }
+
+    .action-btns {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+    }
+}
+
+#toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.toast {
+    min-width: 250px;
+    padding: 15px 20px;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transform: translateX(100%);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.toast.success {
+    background-color: #2E8B57;
+}
+
+.toast.error {
+    background-color: #A30000;
+}

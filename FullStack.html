@@ -5,59 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Full-Stack App</title>
-    <style>
-        /* Only used for responsive overrides that can't be done inline */
-        @media (max-width: 600px) {
-            #nav-links {
-                gap: 8px !important;
-            }
-
-            #home-card {
-                padding: 4vw !important;
-            }
-
-            .form-card {
-                padding: 6vw 5vw !important;
-                width: 80vw !important;
-                min-width: unset !important;
-            }
-
-            .form-card form {
-                width: 100% !important;
-            }
-
-            #profile-page,
-            #employees-page,
-            #departments-page,
-            #accounts-page,
-            #requests-page {
-                padding: 14px !important;
-            }
-
-            .page-table {
-                font-size: 12px !important;
-            }
-
-            .page-table th,
-            .page-table td {
-                padding: 8px 6px !important;
-            }
-
-            #request-modal>div {
-                width: 92vw !important;
-            }
-
-            .action-btns {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 4px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="FullStack.css">
 </head>
 
 <body style="margin: 0; font-family: sans-serif; background-color: #fafafa;">
-
+    <div id="toast-container"></div>
     <nav
         style="display: flex; justify-content: space-between; align-items: center; padding: 10px clamp(16px, 4vw, 40px); background: #222; color: white; box-shadow: 5px 5px 10px 2px rgba(77, 77, 77, 1); position: relative; z-index: 1000; flex-wrap: wrap; gap: 8px;">
         <a href="#/"

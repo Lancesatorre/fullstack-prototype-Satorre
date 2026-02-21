@@ -1,3 +1,24 @@
+// TOAST NOTIFICATION HELPER
+function showToast(message, type = 'success') {
+    const container = document.getElementById('toast-container');
+    if (!container) return; 
+    
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    toast.innerText = message;
+
+    container.appendChild(toast);
+
+    setTimeout(() => {
+        toast.classList.add('show');
+    }, 10);
+
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
+}
+
 const STORAGE_KEY = 'ipt_demo_v1';
 let currentUser = null;
 let editingEmployeeIndex = -1;
@@ -92,7 +113,7 @@ document.getElementById('registerForm').addEventListener('submit', function (e) 
     const password = document.getElementById('reg-password').value;
 
     if (window.db.accounts.find(a => a.email === email)) {
-        alert('Email already exists!');
+        showToast('Email already exists!', 'error');
         return;
     }
 
@@ -109,10 +130,10 @@ document.getElementById('simulate-verify-btn').addEventListener('click', functio
         user.verified = true;
         saveToStorage();
         localStorage.removeItem('unverified_email');
-        alert('Account verified! You can now log in.');
+        showToast('Account verified! You can now log in.', 'success');
         window.location.hash = '#/login';
     } else {
-        alert('No registration found to verify.');
+        showToast('No registration found to verify.', 'error');
         window.location.hash = '#/register';
     }
 });
@@ -124,12 +145,16 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
     const user = window.db.accounts.find(a => a.email === email && a.password === password);
     
     if (user) {
-        if (!user.verified) { alert('Please verify your email first!'); return; }
+        if (!user.verified) { 
+            showToast('Please verify your email first!', 'error'); 
+            return; 
+        }
         localStorage.setItem('auth_token', user.email);
         setAuthState(true, user);
+        showToast('Successfully logged in!', 'success');
         window.location.hash = '#/profile';
     } else {
-        alert('Invalid email or password');
+        showToast('Invalid email or password', 'error');
     }
 });
 
@@ -137,6 +162,7 @@ document.getElementById('logout-btn').addEventListener('click', function (e) {
     e.preventDefault();
     localStorage.removeItem('auth_token');
     setAuthState(false);
+    showToast('Logged out successfully', 'success');
     window.location.hash = '#/';
 });
 
@@ -178,7 +204,7 @@ document.getElementById('editProfileForm').addEventListener('submit', function(e
         renderProfile();
         document.getElementById('edit-profile-form-container').style.display = 'none';
         document.getElementById('profile-details-container').style.display = 'block';
-        alert('Profile updated!');
+        showToast('Profile updated!', 'success');
     }
 });
 
@@ -204,7 +230,10 @@ document.getElementById('cancel-employee-btn').addEventListener('click', functio
 document.getElementById('employeeForm').addEventListener('submit', function(e) {
     e.preventDefault();
     const email = document.getElementById('emp-email').value;
-    if (!window.db.accounts.find(a => a.email === email)) { alert('User email not found!'); return; }
+    if (!window.db.accounts.find(a => a.email === email)) { 
+        showToast('User email not found!', 'error'); 
+        return; 
+    }
     
     const data = {
         id: document.getElementById('emp-id').value,
@@ -220,6 +249,7 @@ document.getElementById('employeeForm').addEventListener('submit', function(e) {
     saveToStorage();
     document.getElementById('employee-form-container').style.display = 'none';
     renderEmployeesTable();
+    showToast('Employee saved!', 'success');
 });
 
 function renderEmployeesTable() {
@@ -250,7 +280,12 @@ window.editEmployee = function(index) {
 };
 
 window.deleteEmployee = function(index) {
-    if(confirm('Delete this employee?')) { window.db.employees.splice(index, 1); saveToStorage(); renderEmployeesTable(); }
+    if(confirm('Delete this employee?')) { 
+        window.db.employees.splice(index, 1); 
+        saveToStorage(); 
+        renderEmployeesTable(); 
+        showToast('Employee deleted', 'success');
+    }
 };
 
 
@@ -273,6 +308,7 @@ document.getElementById('departmentForm').addEventListener('submit', (e) => {
     saveToStorage();
     document.getElementById('department-form-container').style.display = 'none';
     renderDepartmentsTable();
+    showToast('Department saved!', 'success');
 });
 
 function renderDepartmentsTable() {
@@ -297,9 +333,13 @@ window.editDepartment = function(index) {
 };
 
 window.deleteDepartment = function(index) {
-    if(confirm('Delete department?')) { window.db.departments.splice(index, 1); saveToStorage(); renderDepartmentsTable(); }
+    if(confirm('Delete department?')) { 
+        window.db.departments.splice(index, 1); 
+        saveToStorage(); 
+        renderDepartmentsTable(); 
+        showToast('Department deleted', 'success');
+    }
 };
-
 
 
 // ACCOUNTS LOGIC
@@ -328,6 +368,7 @@ document.getElementById('accountForm').addEventListener('submit', function(e) {
     saveToStorage();
     document.getElementById('account-form-container').style.display = 'none';
     renderAccountsTable();
+    showToast('Account saved!', 'success');
 });
 
 function renderAccountsTable() {
@@ -360,14 +401,22 @@ window.editAccount = (idx) => {
 
 window.resetPassword = (idx) => {
     const n = prompt("New password:");
-    if (n && n.length >= 6) { window.db.accounts[idx].password = n; saveToStorage(); alert("Updated!"); }
+    if (n && n.length >= 6) { 
+        window.db.accounts[idx].password = n; 
+        saveToStorage(); 
+        showToast('Password Updated!', 'success');
+    }
 };
 
 window.deleteAccount = (idx) => {
-    if (window.db.accounts[idx].email === currentUser.email) return alert("Can't delete self.");
-    if (confirm('Delete?')) { window.db.accounts.splice(idx, 1); saveToStorage(); renderAccountsTable(); }
+    if (window.db.accounts[idx].email === currentUser.email) return showToast("Can't delete self.", 'error');
+    if (confirm('Delete?')) { 
+        window.db.accounts.splice(idx, 1); 
+        saveToStorage(); 
+        renderAccountsTable(); 
+        showToast('Account deleted', 'success');
+    }
 };
-
 
 
 // MY REQUESTS LOGIC
@@ -429,6 +478,7 @@ document.getElementById('requestForm').onsubmit = (e) => {
     saveToStorage();
     document.getElementById('request-modal').style.display = 'none';
     renderRequests();
+    showToast('Request submitted successfully!', 'success');
 };
 
 
